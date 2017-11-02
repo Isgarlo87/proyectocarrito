@@ -31,6 +31,9 @@ package Helper;
 import Bean.specificimplementation.TipousuarioSpecificBeanImplementation;
 import Bean.specificimplementation.UsuarioSpecificBeanImplementation;
 import Bean.publicinterface.GenericBeanInterface;
+import Bean.specificimplementation.LineapedidoSpecificBeanImplementation;
+import Bean.specificimplementation.PedidoSpecificBeanImplementation;
+import Bean.specificimplementation.ProductoSpecificBeanImplementation;
 
 /**
  *
@@ -48,6 +51,16 @@ public class MappingBeanHelper {
             case "tipousuario":
                 oBean = new TipousuarioSpecificBeanImplementation();
                 break;
+            case "producto":
+                oBean = new ProductoSpecificBeanImplementation();
+                break;
+            case "pedido":
+                oBean = new PedidoSpecificBeanImplementation();
+                break;                
+            case "linea_pedido":
+                oBean = new LineapedidoSpecificBeanImplementation();
+                break;                  
+                
             default:
 
                 //oReplyBean = new ReplyBean(500, "Object not found : Please contact your administrator");
