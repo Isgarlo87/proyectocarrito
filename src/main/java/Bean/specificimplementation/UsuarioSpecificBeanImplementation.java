@@ -13,7 +13,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Bean.publicinterface.GenericBeanInterface;
-
+/**
+ *
+ * @author Kysuke
+ */
 public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplementation {
 
     @Expose

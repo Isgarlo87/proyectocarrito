@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Bean.specificimplementation;
 
 import com.google.gson.annotations.Expose;
@@ -12,7 +13,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Bean.publicinterface.GenericBeanInterface;
-
+/**
+ *
+ * @author Kysuke
+ */
 public class TipousuarioSpecificBeanImplementation extends TableGenericBeanImplementation {
 
     @Expose
