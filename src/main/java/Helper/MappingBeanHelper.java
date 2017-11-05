@@ -59,8 +59,7 @@ public class MappingBeanHelper {
                 break;                
             case "linea_pedido":
                 oBean = new LineapedidoSpecificBeanImplementation();
-                break;                  
-                
+                break;                                  
             default:
 
                 //oReplyBean = new ReplyBean(500, "Object not found : Please contact your administrator");

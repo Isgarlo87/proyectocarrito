@@ -29,6 +29,7 @@
 package Helper;
 
 import Bean.ReplyBean;
+import Service.specificimplementation.CarritoSpecificServiceImplementation;
 import Service.specificimplementation.LineapedidoSpecificServiceImplementation;
 import Service.specificimplementation.PedidoSpecificServiceImplementation;
 import Service.specificimplementation.ProductoSpecificServiceImplementation;
@@ -174,7 +175,29 @@ public class MappingServiceHelper {
                     default:
                         oReplyBean = new ReplyBean(500, EncodingUtilHelper.quotate("Operation not found : Please contact your administrator"));
                         break;
-                }                
+                }
+            case "carrito":
+                CarritoSpecificServiceImplementation oCarritooService = new CarritoSpecificServiceImplementation(oRequest);
+                switch (op) {
+                    case "add":
+                        oReplyBean = oCarritooService.add();
+                        break;
+                    case "list":
+                        oReplyBean = oCarritooService.list();
+                        break;
+                    case "remove":
+                        oReplyBean = oCarritooService.remove();
+                        break;
+                    case "empty":
+                        oReplyBean = oCarritooService.empty();
+                        break;
+                    case "buy":
+                        oReplyBean = oCarritooService.buy();
+                        break;
+                    default:
+                        oReplyBean = new ReplyBean(500, EncodingUtilHelper.quotate("Operation not found : Please contact your administrator"));
+                        break;
+                }
                 break;
             default:
                 oReplyBean = new ReplyBean(500, EncodingUtilHelper.quotate("Object not found : Please contact your administrator"));
