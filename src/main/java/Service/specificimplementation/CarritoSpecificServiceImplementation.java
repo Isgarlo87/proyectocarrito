@@ -175,6 +175,7 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
             try {
                 oPooledConnection = AppConfigurationHelper.getSourceConnection();
                 oConnection = oPooledConnection.newConnection();
+                oConnection.setAutoCommit(false);
                 UsuarioSpecificBeanImplementation oUsuarioBean = (UsuarioSpecificBeanImplementation) oRequest.getSession().getAttribute("user");
                 Integer alCarritoSize = alCarrito.size();
                 PedidoSpecificBeanImplementation oPedidoBean = new PedidoSpecificBeanImplementation(oUsuarioBean.getId(), fecha);
@@ -197,7 +198,9 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
                     oProductoDao.set(oProductoBean);
                 }
                 alCarrito.clear();
+                oConnection.commit();
             } catch (Exception ex) {
+                oConnection.rollback();
                 String msg = this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName();
                 Log4jConfigurationHelper.errorLog(msg, ex);
                 throw new Exception(msg, ex);
