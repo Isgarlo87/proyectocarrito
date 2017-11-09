@@ -96,7 +96,7 @@ public class JsonController extends HttpServlet {
                     out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=carrito&op=list'>Listar Carrito</a></br>");
                     out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=carrito&op=empty'>Vaciar Carrito</a></br>");
                     out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=pedido&op=get&id=11'>Pedido Creado</a></br>");
-                    out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=lineadepedido&op=getpagexpedido&id=1&np=1&rpp=10'>Linea de Pedido Creado</a></br>");
+                    out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=linea_pedido&op=getpagexpedido&id=1&np=1&rpp=10'>Linea de Pedido Creado</a></br>");
                     out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=usuario&op=logout'>Desconectar</a></br>");
                 } catch (Exception ex) {
                     out.print("<h3>Database Conexión KO</h3>");
