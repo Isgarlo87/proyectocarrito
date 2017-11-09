@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 
@@ -105,11 +106,7 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
             ArrayList<CarritoBean> alCarrito = (ArrayList) oRequest.getSession().getAttribute("carrito");
             int id = Integer.parseInt(oRequest.getParameter("id"));
             ReplyBean oReplyBean = null;
-            Connection oConnection = null;
-            ConnectionInterface oPooledConnection = null;
             try {
-                oPooledConnection = AppConfigurationHelper.getSourceConnection();
-                oConnection = oPooledConnection.newConnection();
                 CarritoBean oCarrito = find(alCarrito, id);
                 alCarrito.remove(oCarrito);
                 Gson oGson = AppConfigurationHelper.getGson();
@@ -119,13 +116,6 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
                 String msg = this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName();
                 Log4jConfigurationHelper.errorLog(msg, ex);
                 throw new Exception(msg, ex);
-            } finally {
-                if (oConnection != null) {
-                    oConnection.close();
-                }
-                if (AppConfigurationHelper.getSourceConnection() != null) {
-                    AppConfigurationHelper.getSourceConnection().disposeConnection();
-                }
             }
             return oReplyBean;
         } else {
@@ -138,11 +128,7 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
         if (this.checkPermission("list")) {
             ArrayList<CarritoBean> alCarrito = (ArrayList) oRequest.getSession().getAttribute("carrito");
             ReplyBean oReplyBean = null;
-            Connection oConnection = null;
-            ConnectionInterface oPooledConnection = null;
             try {
-                oPooledConnection = AppConfigurationHelper.getSourceConnection();
-                oConnection = oPooledConnection.newConnection();
                 Gson oGson = AppConfigurationHelper.getGson();
                 String strJson = oGson.toJson(alCarrito);
                 oReplyBean = new ReplyBean(200, strJson);
@@ -150,13 +136,6 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
                 String msg = this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName();
                 Log4jConfigurationHelper.errorLog(msg, ex);
                 throw new Exception(msg, ex);
-            } finally {
-                if (oConnection != null) {
-                    oConnection.close();
-                }
-                if (AppConfigurationHelper.getSourceConnection() != null) {
-                    AppConfigurationHelper.getSourceConnection().disposeConnection();
-                }
             }
             return oReplyBean;
         } else {
@@ -171,7 +150,7 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
             ReplyBean oReplyBean = null;
             Connection oConnection = null;
             ConnectionInterface oPooledConnection = null;
-            Date fecha = new Date(1970 / 01 / 01); //Date.valueOf(oRequest.getParameter("fecha"));
+            Date fecha = (Date) Calendar.getInstance().getTime();
             try {
                 oPooledConnection = AppConfigurationHelper.getSourceConnection();
                 oConnection = oPooledConnection.newConnection();
@@ -223,29 +202,15 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
         if (this.checkPermission("empty")) {
             ArrayList<CarritoBean> alCarrito = (ArrayList) oRequest.getSession().getAttribute("carrito");
             ReplyBean oReplyBean = null;
-            Connection oConnection = null;
-            ConnectionInterface oPooledConnection = null;
             try {
-                oPooledConnection = AppConfigurationHelper.getSourceConnection();
-                oConnection = oPooledConnection.newConnection();
-
                 alCarrito.clear();
-
                 Gson oGson = AppConfigurationHelper.getGson();
                 String strJson = oGson.toJson(alCarrito);
                 oReplyBean = new ReplyBean(200, strJson);
-
             } catch (Exception ex) {
                 String msg = this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName();
                 Log4jConfigurationHelper.errorLog(msg, ex);
                 throw new Exception(msg, ex);
-            } finally {
-                if (oConnection != null) {
-                    oConnection.close();
-                }
-                if (AppConfigurationHelper.getSourceConnection() != null) {
-                    AppConfigurationHelper.getSourceConnection().disposeConnection();
-                }
             }
             return oReplyBean;
         } else {
