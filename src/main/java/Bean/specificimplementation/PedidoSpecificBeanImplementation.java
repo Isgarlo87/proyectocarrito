@@ -25,6 +25,8 @@ public class PedidoSpecificBeanImplementation extends TableGenericBeanImplementa
     private Date fecha;
     @Expose
     private Integer iva;
+    @Expose
+    private Boolean tiene_iva;
     @Expose(serialize = false)
     private Integer id_usuario = 0;
     @Expose(deserialize = false)
@@ -65,6 +67,14 @@ public class PedidoSpecificBeanImplementation extends TableGenericBeanImplementa
 
     public void setIva(Integer iva) {
         this.iva = iva;
+    }
+
+    public Boolean getTiene_iva() {
+        return tiene_iva;
+    }
+
+    public void setTiene_iva(Boolean tiene_iva) {
+        this.tiene_iva = tiene_iva;
     }
 
     public Integer getId_usuario() {
@@ -129,5 +139,4 @@ public class PedidoSpecificBeanImplementation extends TableGenericBeanImplementa
 
         return this;
     }
-
 }

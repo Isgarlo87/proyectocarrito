@@ -86,7 +86,7 @@ public class JsonController extends HttpServlet {
                     oPooledConnection = AppConfigurationHelper.getSourceConnection();
                     oConnection = oPooledConnection.newConnection();
                     out.print("<h3>Database Connection OK</h3>");
-                    out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=usuario&op=login&user=isma&pass=1234'>Login Admin</a></br>");
+                    out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=usuario&op=login&user=pablo&pass=pablo'>Login Admin</a></br>");
                     out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=usuario&op=getsessionstatus'>Check Session</a></br>");
                     out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=producto&op=getpage&np=1&rpp=3'>Productos Paginados</a></br>");
                     out.print("<a href='http://localhost:8081/proyectoServidorGenerico/json?ob=pedido&op=getpage&np=1&rpp=10'>Todos Pedidos</a></br>");
