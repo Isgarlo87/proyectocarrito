@@ -16,7 +16,7 @@ import Service.publicinterface.TableServiceCarritoInterface;
 import Service.publicinterface.ViewServiceCarritoInterface;
 import com.google.gson.Gson;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -157,7 +157,7 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
                 oConnection.setAutoCommit(false);
                 UsuarioSpecificBeanImplementation oUsuarioBean = (UsuarioSpecificBeanImplementation) oRequest.getSession().getAttribute("user");
                 Integer alCarritoSize = alCarrito.size();
-                PedidoSpecificBeanImplementation oPedidoBean = new PedidoSpecificBeanImplementation(oUsuarioBean.getId(), fecha);
+                PedidoSpecificBeanImplementation oPedidoBean = new PedidoSpecificBeanImplementation(oUsuarioBean.getId(),fecha);
                 PedidoSpecificDaoImplementation oPedidoDao = new PedidoSpecificDaoImplementation(oConnection, (UsuarioSpecificBeanImplementation) oRequest.getSession().getAttribute("user"), null);
                 oPedidoBean.setId(oPedidoDao.set(oPedidoBean));
 //              oPedidoDao.set(oPedidoBean);
