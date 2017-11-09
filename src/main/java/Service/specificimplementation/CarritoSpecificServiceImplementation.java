@@ -171,7 +171,7 @@ public class CarritoSpecificServiceImplementation implements TableServiceCarrito
             ReplyBean oReplyBean = null;
             Connection oConnection = null;
             ConnectionInterface oPooledConnection = null;
-            Date fecha = new Date(2017 / 10 / 27); //Date.valueOf(oRequest.getParameter("fecha"));
+            Date fecha = new Date(1970 / 01 / 01); //Date.valueOf(oRequest.getParameter("fecha"));
             try {
                 oPooledConnection = AppConfigurationHelper.getSourceConnection();
                 oConnection = oPooledConnection.newConnection();
