@@ -149,6 +149,7 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
         strColumns += "login,";
         strColumns += "pass,";
         strColumns += "email,";
+        strColumns += "fecha_nacimiento,";
         strColumns += "id_tipousuario";
 
         return strColumns;
@@ -164,6 +165,7 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
         strColumns += EncodingUtilHelper.quotate(segundo_apellido) + ",";
         strColumns += EncodingUtilHelper.quotate(login) + ",";
         strColumns += EncodingUtilHelper.quotate(pass) + ",";
+        strColumns += EncodingUtilHelper.stringifyAndQuotate(fecha_nacimiento) + ",";
         strColumns += EncodingUtilHelper.quotate(email) + ",";
         strColumns += id_tipousuario;
         return strColumns;
@@ -179,6 +181,7 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
         strPairs += "login=" + EncodingUtilHelper.quotate(login) + ",";
         strPairs += "pass=" + EncodingUtilHelper.quotate(pass) + ",";
         strPairs += "email=" + EncodingUtilHelper.quotate(email) + ",";
+        strPairs += "fecha_nacimiento=" + EncodingUtilHelper.stringifyAndQuotate(fecha_nacimiento) + ",";
         strPairs += "id_tipousuario=" + id_tipousuario;
         return strPairs;
     }
@@ -193,7 +196,7 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
         this.setLogin(oResultSet.getString("login"));
         this.setPass(oResultSet.getString("pass"));
         this.setEmail(oResultSet.getString("email"));
-        this.setFecha_nacimiento(oResultSet.getDate("fecha_nacimieto"));
+        this.setFecha_nacimiento(oResultSet.getDate("fecha_nacimiento"));
         this.setId_tipousuario(oResultSet.getInt("id_tipousuario"));
         if (expand > 0) {
             TipousuarioSpecificBeanImplementation oTipousuarioBean = new TipousuarioSpecificBeanImplementation();
