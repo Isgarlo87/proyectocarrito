@@ -50,7 +50,7 @@ public class SqlBuilderHelper {
     private static String getFormatDate(String dateIn) throws ParseException {
         SimpleDateFormat parseador = new SimpleDateFormat("dd/MM/yyyy");
         Date date = parseador.parse(dateIn);
-        SimpleDateFormat formateador = new SimpleDateFormat("yyy/MM/dd");
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyy/MM/dd");
         String fecha = formateador.format(date);
         return fecha;
     }
