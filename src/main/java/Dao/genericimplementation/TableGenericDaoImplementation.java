@@ -29,11 +29,12 @@ public abstract class TableGenericDaoImplementation extends ViewGenericDaoImplem
     public TableGenericBeanImplementation get(int id, int intExpand) throws Exception {
         PreparedStatement oPreparedStatement = null;
         ResultSet oResultSet = null;
-        strSQL += " AND id=" + id;
+        strSQL += " AND id=? ";
         TableGenericBeanImplementation oBean = null;
         try {
             oPreparedStatement = oConnection.prepareStatement(strSQL);
-            oResultSet = oPreparedStatement.executeQuery(strSQL);
+            oPreparedStatement.setInt(1, id);
+            oResultSet = oPreparedStatement.executeQuery();
             if (oResultSet.next()) {
                 oBean = (TableGenericBeanImplementation) MappingBeanHelper.getBean(ob);
                 oBean = (TableGenericBeanImplementation) oBean.fill(oResultSet, oConnection, oPuserSecurity, intExpand);
@@ -69,15 +70,18 @@ public abstract class TableGenericDaoImplementation extends ViewGenericDaoImplem
                 strSQL += "(" + oBean.getColumns() + ")";
                 strSQL += " VALUES ";
                 strSQL += "(" + oBean.getValues() + ")";
+                oPreparedStatement = oConnection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
+                iResult = oPreparedStatement.executeUpdate();
             } else {
                 insert = false;
                 strSQL = "UPDATE " + ob;
                 strSQL += " SET ";
                 strSQL += oBean.toPairs();
-                strSQL += " WHERE id=" + oBean.getId();
+                strSQL += " WHERE id=? ";
+                oPreparedStatement = oConnection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
+                oPreparedStatement.setInt(1, oBean.getId());
+                iResult = oPreparedStatement.executeUpdate();
             }
-            oPreparedStatement = oConnection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
-            iResult = oPreparedStatement.executeUpdate();
             if (iResult < 1) {
                 String msg = this.getClass().getName() + ": set";
                 Log4jConfigurationHelper.errorLog(msg);
@@ -89,7 +93,9 @@ public abstract class TableGenericDaoImplementation extends ViewGenericDaoImplem
                 iResult = oResultSet.getInt(1);
             }
         } catch (Exception ex) {
-            throw new Exception();
+            String msg = this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName();
+            Log4jConfigurationHelper.errorLog(msg, ex);
+            throw new Exception(msg, ex);
         } finally {
             if (insert) {
                 if (oResultSet != null) {
