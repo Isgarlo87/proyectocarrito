@@ -47,7 +47,7 @@ public abstract class GenericViewService implements ViewServiceInterface {
     }
 
     /*
-    * http://127.0.0.1:8081/generic-carrito-server/json?ob=xxxxxx&op=getpage&np=1&rpp=10
+    * http://127.0.0.1:8081/trolleyes-server/json?ob=xxxxxx&op=getpage&np=1&rpp=10
      */
     @Override
     public ReplyBean getPage() throws Exception {
@@ -89,7 +89,7 @@ public abstract class GenericViewService implements ViewServiceInterface {
     }
 
     /*
-    * http://127.0.0.1:8081/generic-carrito-server/json?ob=xxxxxxxx&op=getcount
+    * http://127.0.0.1:8081/trolleyes-server/json?ob=xxxxxxxx&op=getcount
      */
     @Override
     public ReplyBean getCount() throws Exception {
@@ -130,7 +130,6 @@ public abstract class GenericViewService implements ViewServiceInterface {
         if (this.checkPermission("getpagex")) {
             int np = Integer.parseInt(oRequest.getParameter("np"));
             int rpp = Integer.parseInt(oRequest.getParameter("rpp"));
-            int id = Integer.parseInt(oRequest.getParameter("id"));
             int id_foreign = Integer.parseInt(oRequest.getParameter("id_foreign"));
             String ob_foreign = oRequest.getParameter("ob_foreign");
             String strOrder = oRequest.getParameter("order");
