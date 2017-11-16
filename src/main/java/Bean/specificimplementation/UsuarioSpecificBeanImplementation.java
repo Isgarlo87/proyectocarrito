@@ -141,13 +141,12 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
     @Override
     public String getColumns() {
         String strColumns = "";
-        strColumns += "id,";
         strColumns += "dni,";
         strColumns += "nombre,";
         strColumns += "primer_apellido,";
         strColumns += "segundo_apellido,";
         strColumns += "login,";
-        strColumns += "pass";
+        strColumns += "pass,";
         strColumns += "email,";
         strColumns += "fecha_nacimiento,";
         strColumns += "id_tipousuario";
@@ -158,7 +157,7 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
     @Override
     public String getValues() {
         String strColumns = "";
-        strColumns += id + ",";
+
         strColumns += EncodingUtilHelper.quotate(dni) + ",";
         strColumns += EncodingUtilHelper.quotate(nombre) + ",";
         strColumns += EncodingUtilHelper.quotate(primer_apellido) + ",";
