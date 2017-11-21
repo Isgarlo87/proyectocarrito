@@ -88,34 +88,34 @@ public class LineapedidoSpecificBeanImplementation extends TableGenericBeanImple
         this.obj_producto = obj_producto;
     }
 
-    @Override
-    public String getColumns() {
-        String strColumns = "";
-        strColumns += "id,";
-        strColumns += "cantidad,";
-        strColumns += "id_pedido,";
-        strColumns += "id_producto";
-        return strColumns;
-    }
-
-    @Override
-    public String getValues() {
-        String strColumns = "";
-        strColumns += id + ",";
-        strColumns += cantidad + ",";
-        strColumns += id_pedido + ",";
-        strColumns += id_producto;
-        return strColumns;
-    }
-
-    @Override
-    public String toPairs() {
-        String strPairs = "";
-        strPairs += "cantidad=" + cantidad + ",";
-        strPairs += "id_pedido=" + id_pedido + ",";
-        strPairs += "id_producto=" + id_producto;
-        return strPairs;
-    }
+//    @Override
+//    public String getColumns() {
+//        String strColumns = "";
+//        strColumns += "id,";
+//        strColumns += "cantidad,";
+//        strColumns += "id_pedido,";
+//        strColumns += "id_producto";
+//        return strColumns;
+//    }
+//
+//    @Override
+//    public String getValues() {
+//        String strColumns = "";
+//        strColumns += id + ",";
+//        strColumns += cantidad + ",";
+//        strColumns += id_pedido + ",";
+//        strColumns += id_producto;
+//        return strColumns;
+//    }
+//
+//    @Override
+//    public String toPairs() {
+//        String strPairs = "";
+//        strPairs += "cantidad=" + cantidad + ",";
+//        strPairs += "id_pedido=" + id_pedido + ",";
+//        strPairs += "id_producto=" + id_producto;
+//        return strPairs;
+//    }
 
     @Override
     public GenericBeanInterface fill(ResultSet oResultSet, Connection oConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {

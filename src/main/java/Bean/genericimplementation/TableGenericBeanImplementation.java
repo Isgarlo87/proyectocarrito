@@ -68,19 +68,31 @@ public abstract class TableGenericBeanImplementation extends ViewGenericBeanImpl
             TableGenericBeanImplementation oBean = (TableGenericBeanImplementation) Class.forName(this.getClass().getName()).newInstance();
             Field[] oFields = oBean.getClass().getDeclaredFields();
             for (Field x : oFields) {
-                switch (x.getGenericType().getTypeName()) {
-                    case "java.lang.String":
-                        strColumns += EncodingUtilHelper.quotate(x.getName()) + ",";
-                        break;
-                    case "java.lang.Date":
-                        strColumns += EncodingUtilHelper.stringifyAndQuotate((Date) x.get(oBean)) + ",";
-                        break;
-                    default:
-                        strColumns += x.getName() + ",";
-                        break;
+                x.setAccessible(true);
+                if (!x.getName().startsWith("obj_")) {
+                    if (x.getName().equals("pass")) {
+                        strColumns += EncodingUtilHelper.quotate("da8ab09ab4889c6208116a675cad0b13e335943bd7fc418782d054b32fdfba04") + ",";
+                    } else {
+                        if (x.getType() == String.class) {
+                            strColumns += EncodingUtilHelper.quotate((String) x.get(this)) + ",";
+                        }
+                        if (x.getType() == Date.class) {
+                            strColumns += EncodingUtilHelper.stringifyAndQuotate((Date) x.get(this)) + ",";
+                        }
+                        if (x.getType() == Integer.class) {
+                            strColumns += x.get(this) + ",";
+                        }
+                        if (x.getType() == Double.class) {
+                            strColumns += x.get(this) + ",";
+                        }
+                    }
+
                 }
+                x.setAccessible(false);
             }
-            strColumns = strColumns.substring(0, strColumns.length() - 1);
+            if (!strColumns.equals("")) {
+                strColumns = strColumns.substring(0, strColumns.length() - 1);
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             String msg = this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName();
             Log4jConfigurationHelper.errorLog(msg, ex);
@@ -91,11 +103,48 @@ public abstract class TableGenericBeanImplementation extends ViewGenericBeanImpl
 
     @Override
     public String toPairs() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String strPairs = "";
+        try {
+            TableGenericBeanImplementation oBean = (TableGenericBeanImplementation) Class.forName(this.getClass().getName()).newInstance();
+            Field[] oFields = oBean.getClass().getDeclaredFields();
+            for (Field x : oFields) {
+                x.setAccessible(true);
+                if (!x.getName().startsWith("obj_")) {
+                    if (x.getName().equals("pass")) {
+                        strPairs += x.getName() + "=" + EncodingUtilHelper.quotate("da8ab09ab4889c6208116a675cad0b13e335943bd7fc418782d054b32fdfba04") + ",";
+                    } else {
+                        if (x.getType() == String.class) {
+                            strPairs += x.getName() + "=" + EncodingUtilHelper.quotate((String) x.get(this)) + ",";
+                        }
+                        if (x.getType() == Date.class) {
+                            strPairs += x.getName() + "=" + EncodingUtilHelper.stringifyAndQuotate((Date) x.get(this)) + ",";
+                        }
+                        if (x.getType() == Integer.class) {
+                            strPairs += x.getName() + "=" + x.get(this) + ",";
+                        }
+                        if (x.getType() == Double.class) {
+                            strPairs += x.getName() + "=" + x.get(this) + ",";
+                        }
+                    }
+
+                }
+                x.setAccessible(false);
+            }
+            if (!strPairs.equals("")) {
+                strPairs = strPairs.substring(0, strPairs.length() - 1);
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            String msg = this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName();
+            Log4jConfigurationHelper.errorLog(msg, ex);
+            throw new Exception(msg, ex);
+        }
+        return strPairs;
+
     }
 
     @Override
-    public GenericBeanInterface fill(ResultSet oResultSet, Connection pooledConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
+    public GenericBeanInterface fill(ResultSet oResultSet, Connection pooledConnection,
+            UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

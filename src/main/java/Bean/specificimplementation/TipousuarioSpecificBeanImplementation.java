@@ -38,29 +38,29 @@ public class TipousuarioSpecificBeanImplementation extends TableGenericBeanImple
         this.descripcion = descripcion;
     }
 
-    @Override
-    public String getColumns() {
-        String strColumns = "";
-        strColumns += "id,";
-        strColumns += "descripcion";
-        return strColumns;
-    }
-
-    @Override
-    public String getValues() {
-        String strColumns = "";
-        strColumns += id + ",";
-        strColumns += EncodingUtilHelper.quotate(descripcion);
-        return strColumns;
-    }
-
-    @Override
-    public String toPairs() {
-        String strPairs = "";
-        //strPairs += "id=" + id + ",";
-        strPairs += "descripcion=" + EncodingUtilHelper.quotate(descripcion);
-        return strPairs;
-    }
+//    @Override
+//    public String getColumns() {
+//        String strColumns = "";
+//        strColumns += "id,";
+//        strColumns += "descripcion";
+//        return strColumns;
+//    }
+//
+//    @Override
+//    public String getValues() {
+//        String strColumns = "";
+//        strColumns += id + ",";
+//        strColumns += EncodingUtilHelper.quotate(descripcion);
+//        return strColumns;
+//    }
+//
+//    @Override
+//    public String toPairs() {
+//        String strPairs = "";
+//        //strPairs += "id=" + id + ",";
+//        strPairs += "descripcion=" + EncodingUtilHelper.quotate(descripcion);
+//        return strPairs;
+//    }
 
     @Override
     public GenericBeanInterface fill(ResultSet oResultSet, Connection pooledConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
