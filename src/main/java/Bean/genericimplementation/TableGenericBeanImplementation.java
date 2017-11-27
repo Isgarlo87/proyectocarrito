@@ -7,8 +7,10 @@ package Bean.genericimplementation;
 
 import Bean.publicinterface.GenericBeanInterface;
 import Bean.specificimplementation.UsuarioSpecificBeanImplementation;
+import Dao.publicinterface.TableDaoInterface;
 import Helper.EncodingUtilHelper;
 import Helper.Log4jConfigurationHelper;
+import Helper.MappingDaoHelper;
 import com.google.gson.annotations.Expose;
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -143,9 +145,45 @@ public abstract class TableGenericBeanImplementation extends ViewGenericBeanImpl
     }
 
     @Override
-    public GenericBeanInterface fill(ResultSet oResultSet, Connection pooledConnection,
-            UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GenericBeanInterface fill(ResultSet oResultSet, Connection oConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws Exception {
+        ViewGenericBeanImplementation oBean = (ViewGenericBeanImplementation) Class.forName(this.getClass().getName()).newInstance();
+        if (this.getClass().getSuperclass() == TableGenericBeanImplementation.class) {
+            Field x = this.getClass().getSuperclass().getDeclaredField("id");
+            x.setAccessible(true);
+            x.set(this, oResultSet.getInt("id"));
+            x.setAccessible(false);
+        }
+        Field[] oFields = oBean.getClass().getDeclaredFields();
+        for (Field x : oFields) {
+            x.setAccessible(true);
+            if (x.getName().startsWith("obj_")) {
+                if (expand > 0) {
+                    String ob = x.getName().substring(x.getName().indexOf("_") + 1);
+                    TableDaoInterface oObDao = (TableDaoInterface) MappingDaoHelper.getDao(ob, oConnection, oPuserBean_security, null);
+                    TableGenericBeanImplementation oObBean = (TableGenericBeanImplementation) oObDao.get(oResultSet.getInt("id_" + ob), expand - 1);
+                    x.set(this, oObBean);
+                }
+            } else {
+                if (x.getName().startsWith("id_")) {
+                    x.set(this, oResultSet.getInt(x.getName()));
+                } else {
+                    if (x.getType() == String.class) {
+                        x.set(this, oResultSet.getString(x.getName()));
+                    }
+                    if (x.getType() == Date.class) {
+                        x.set(this, oResultSet.getDate(x.getName()));
+                    }
+                    if (x.getType() == Double.class) {
+                        x.set(this, oResultSet.getDouble(x.getName()));
+                    }
+                    if (x.getType() == Integer.class || x.getType() == int.class) {
+                        x.set(this, oResultSet.getInt(x.getName()));
+                    }
+                }
+            }
+            x.setAccessible(false);
+        }
+        return this;
     }
 
 }

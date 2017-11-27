@@ -125,22 +125,22 @@ public class PedidoSpecificBeanImplementation extends TableGenericBeanImplementa
 //        return strPairs;
 //    }
     
-    @Override
-    public GenericBeanInterface fill(ResultSet oResultSet, Connection oConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
-        this.setId(oResultSet.getInt("id"));
-        this.setFecha(oResultSet.getDate("fecha"));
-        this.setIva(oResultSet.getInt("iva"));
-        this.setTiene_iva(oResultSet.getBoolean("tiene_iva"));
-        this.setId_usuario(oResultSet.getInt("id_usuario"));
-        if (expand > 0) {
-            UsuarioSpecificBeanImplementation oUsuarioBean = new UsuarioSpecificBeanImplementation();
-            UsuarioSpecificDaoImplementation oUsuarioDao = new UsuarioSpecificDaoImplementation(oConnection, oPuserBean_security, null);
-            oUsuarioBean = (UsuarioSpecificBeanImplementation) oUsuarioDao.get(oResultSet.getInt("id_usuario"), expand - 1);
-            this.setObj_usuario(oUsuarioBean);
-        } else {
-            this.setId_usuario(oResultSet.getInt("id_usuario"));
-        }
-        
-        return this;
-    }
+//    @Override
+//    public GenericBeanInterface fill(ResultSet oResultSet, Connection oConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
+//        this.setId(oResultSet.getInt("id"));
+//        this.setFecha(oResultSet.getDate("fecha"));
+//        this.setIva(oResultSet.getInt("iva"));
+//        this.setTiene_iva(oResultSet.getBoolean("tiene_iva"));
+//        this.setId_usuario(oResultSet.getInt("id_usuario"));
+//        if (expand > 0) {
+//            UsuarioSpecificBeanImplementation oUsuarioBean = new UsuarioSpecificBeanImplementation();
+//            UsuarioSpecificDaoImplementation oUsuarioDao = new UsuarioSpecificDaoImplementation(oConnection, oPuserBean_security, null);
+//            oUsuarioBean = (UsuarioSpecificBeanImplementation) oUsuarioDao.get(oResultSet.getInt("id_usuario"), expand - 1);
+//            this.setObj_usuario(oUsuarioBean);
+//        } else {
+//            this.setId_usuario(oResultSet.getInt("id_usuario"));
+//        }
+//        
+//        return this;
+//    }
 }

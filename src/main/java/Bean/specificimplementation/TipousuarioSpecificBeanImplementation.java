@@ -62,11 +62,11 @@ public class TipousuarioSpecificBeanImplementation extends TableGenericBeanImple
 //        return strPairs;
 //    }
 
-    @Override
-    public GenericBeanInterface fill(ResultSet oResultSet, Connection pooledConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
-        this.setId(oResultSet.getInt("id"));
-        this.setDescripcion(oResultSet.getString("descripcion"));
-        return this;
-    }
+//    @Override
+//    public GenericBeanInterface fill(ResultSet oResultSet, Connection pooledConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
+//        this.setId(oResultSet.getInt("id"));
+//        this.setDescripcion(oResultSet.getString("descripcion"));
+//        return this;
+//    }
 
 }

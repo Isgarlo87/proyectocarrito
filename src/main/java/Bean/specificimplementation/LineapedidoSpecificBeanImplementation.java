@@ -117,28 +117,28 @@ public class LineapedidoSpecificBeanImplementation extends TableGenericBeanImple
 //        return strPairs;
 //    }
 
-    @Override
-    public GenericBeanInterface fill(ResultSet oResultSet, Connection oConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
-        this.setId(oResultSet.getInt("id"));
-        this.setCantidad(oResultSet.getInt("cantidad"));
-        this.setId_pedido(oResultSet.getInt("id_pedido"));
-        this.setId_producto(oResultSet.getInt("id_producto"));
-        if (expand > 0) {
-            //expansion producto
-            ProductoSpecificBeanImplementation oProductoBean = new ProductoSpecificBeanImplementation();
-            ProductoSpecificDaoImplementation oProductoDao = new ProductoSpecificDaoImplementation(oConnection, oPuserBean_security, null);
-            oProductoBean = (ProductoSpecificBeanImplementation) oProductoDao.get(oResultSet.getInt("id_producto"), expand - 1);
-            this.setObj_producto(oProductoBean);
-            //exapansion pedido
-            PedidoSpecificBeanImplementation oPedidoBean = new PedidoSpecificBeanImplementation();
-            PedidoSpecificDaoImplementation oPedidoDao = new PedidoSpecificDaoImplementation(oConnection, oPuserBean_security, null);
-            oPedidoBean = (PedidoSpecificBeanImplementation) oPedidoDao.get(oResultSet.getInt("id_pedido"), expand - 1);
-            this.setObj_pedido(oPedidoBean);
-        } else {
-            this.setId_producto(oResultSet.getInt("id_producto"));
-            this.setId_pedido(oResultSet.getInt("id_pedido"));
-        }
-
-        return this;
-    }
+//    @Override
+//    public GenericBeanInterface fill(ResultSet oResultSet, Connection oConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
+//        this.setId(oResultSet.getInt("id"));
+//        this.setCantidad(oResultSet.getInt("cantidad"));
+//        this.setId_pedido(oResultSet.getInt("id_pedido"));
+//        this.setId_producto(oResultSet.getInt("id_producto"));
+//        if (expand > 0) {
+//            //expansion producto
+//            ProductoSpecificBeanImplementation oProductoBean = new ProductoSpecificBeanImplementation();
+//            ProductoSpecificDaoImplementation oProductoDao = new ProductoSpecificDaoImplementation(oConnection, oPuserBean_security, null);
+//            oProductoBean = (ProductoSpecificBeanImplementation) oProductoDao.get(oResultSet.getInt("id_producto"), expand - 1);
+//            this.setObj_producto(oProductoBean);
+//            //exapansion pedido
+//            PedidoSpecificBeanImplementation oPedidoBean = new PedidoSpecificBeanImplementation();
+//            PedidoSpecificDaoImplementation oPedidoDao = new PedidoSpecificDaoImplementation(oConnection, oPuserBean_security, null);
+//            oPedidoBean = (PedidoSpecificBeanImplementation) oPedidoDao.get(oResultSet.getInt("id_pedido"), expand - 1);
+//            this.setObj_pedido(oPedidoBean);
+//        } else {
+//            this.setId_producto(oResultSet.getInt("id_producto"));
+//            this.setId_pedido(oResultSet.getInt("id_pedido"));
+//        }
+//
+//        return this;
+//    }
 }

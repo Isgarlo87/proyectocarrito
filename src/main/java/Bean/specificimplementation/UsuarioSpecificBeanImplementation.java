@@ -185,28 +185,28 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
 //        return strPairs;
 //    }
 
-    @Override
-    public GenericBeanInterface fill(ResultSet oResultSet, Connection oConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
-        this.setId(oResultSet.getInt("id"));
-        this.setDni(oResultSet.getString("dni"));
-        this.setNombre(oResultSet.getString("nombre"));
-        this.setPrimer_apellido(oResultSet.getString("primer_apellido"));
-        this.setSegundo_apellido(oResultSet.getString("segundo_apellido"));
-        this.setLogin(oResultSet.getString("login"));
-        this.setPass(oResultSet.getString("pass"));
-        this.setEmail(oResultSet.getString("email"));
-        this.setFecha_nacimiento(oResultSet.getDate("fecha_nacimiento"));
-        this.setId_tipousuario(oResultSet.getInt("id_tipousuario"));
-        if (expand > 0) {
-            TipousuarioSpecificBeanImplementation oTipousuarioBean = new TipousuarioSpecificBeanImplementation();
-            TipousuarioSpecificDaoImplementation oTipousuarioDao = new TipousuarioSpecificDaoImplementation(oConnection, oPuserBean_security, null);
-            oTipousuarioBean = (TipousuarioSpecificBeanImplementation) oTipousuarioDao.get(oResultSet.getInt("id_tipousuario"), expand - 1);
-            this.setObj_tipousuario(oTipousuarioBean);
-        } else {
-            this.setId_tipousuario(oResultSet.getInt("id_tipousuario"));
-        }
-
-        return this;
-    }
+//    @Override
+//    public GenericBeanInterface fill(ResultSet oResultSet, Connection oConnection, UsuarioSpecificBeanImplementation oPuserBean_security, Integer expand) throws SQLException, Exception {
+//        this.setId(oResultSet.getInt("id"));
+//        this.setDni(oResultSet.getString("dni"));
+//        this.setNombre(oResultSet.getString("nombre"));
+//        this.setPrimer_apellido(oResultSet.getString("primer_apellido"));
+//        this.setSegundo_apellido(oResultSet.getString("segundo_apellido"));
+//        this.setLogin(oResultSet.getString("login"));
+//        this.setPass(oResultSet.getString("pass"));
+//        this.setEmail(oResultSet.getString("email"));
+//        this.setFecha_nacimiento(oResultSet.getDate("fecha_nacimiento"));
+//        this.setId_tipousuario(oResultSet.getInt("id_tipousuario"));
+//        if (expand > 0) {
+//            TipousuarioSpecificBeanImplementation oTipousuarioBean = new TipousuarioSpecificBeanImplementation();
+//            TipousuarioSpecificDaoImplementation oTipousuarioDao = new TipousuarioSpecificDaoImplementation(oConnection, oPuserBean_security, null);
+//            oTipousuarioBean = (TipousuarioSpecificBeanImplementation) oTipousuarioDao.get(oResultSet.getInt("id_tipousuario"), expand - 1);
+//            this.setObj_tipousuario(oTipousuarioBean);
+//        } else {
+//            this.setId_tipousuario(oResultSet.getInt("id_tipousuario"));
+//        }
+//
+//        return this;
+//    }
 
 }
